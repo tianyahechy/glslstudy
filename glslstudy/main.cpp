@@ -8,7 +8,7 @@
 class sample1 : public OpenGLWindow
 {
 public:
-	HelloShader _shader;
+	shaderProgram _shader;
 public:
 	struct vertex
 	{
