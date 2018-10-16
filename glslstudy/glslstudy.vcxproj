@@ -40,7 +40,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
     <OutDir>../../bin/$(configuration)$(Platform)/$(ProjectName).exe</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -82,6 +82,7 @@
   <ItemGroup>
     <ClInclude Include="GLContext.h" />
     <ClInclude Include="glew\glew.h" />
+    <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="OpenGLWindow.h" />
   </ItemGroup>
   <ItemGroup>

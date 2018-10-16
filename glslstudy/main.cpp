@@ -3,9 +3,12 @@
 #include <math.h>
 #include "glew/glew.h"
 #include "OpenGLWindow.h"
+#include "GLSLProgram.h"
 
 class sample1 : public OpenGLWindow
 {
+public:
+	HelloShader _shader;
 public:
 	struct vertex
 	{
@@ -20,11 +23,10 @@ public:
 	virtual void onInitGL()
 	{
 		glewInit();
+		_shader.initialize();
 	}
 	virtual void render()
 	{
-		char * ext = (char *)glGetString(GL_EXTENSIONS);
-#define M_PI	(3.1415926535)
 		//指定以下的操作针对投影矩阵
 		glMatrixMode(GL_PROJECTION);
 		//将投影矩阵清空成单位矩阵
@@ -43,8 +45,11 @@ public:
 		glEnableClientState(GL_COLOR_ARRAY);
 		glVertexPointer(3, GL_FLOAT, sizeof(vertex), rect);
 		glColorPointer(3, GL_FLOAT, sizeof(vertex), &rect[0].r);
+		_shader.begin();
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+		_shader.end();
 
+		//return;
 		vertex rect1[] =
 		{
 			{ 10, 10, 0, 1, 0, 0 },
