@@ -132,7 +132,7 @@ public:
 
 };
 
-class shaderProgram : public GLSLProgram
+class ShaderUniform : public GLSLProgram
 {
 public:
 	uniform _color;
@@ -146,7 +146,7 @@ public:
 		const char * ps = " uniform vec4 _color; \
 						  						void main() \
 																		{\
-																								gl_FragColor = vec4(1,0,0,1);\
+																								gl_FragColor = _color;\
 																														}";
 		createProgram(vs, ps);
 		_color = glGetUniformLocation(_program, "_color");
