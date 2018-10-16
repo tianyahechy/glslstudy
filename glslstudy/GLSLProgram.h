@@ -130,6 +130,16 @@ public:
 		_color = glGetUniformLocation(_program, "_color");
 	}
 
+	// π”√shader
+	virtual void begin()
+	{
+		glUseProgram(_program);
+	}
+	//Ω· ¯
+	virtual void end()
+	{
+		glUseProgram(0);
+	}
 private:
 
 };
