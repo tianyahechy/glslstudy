@@ -46,8 +46,8 @@ public:
 		glVertexPointer(3, GL_FLOAT, sizeof(vertex), rect);
 		glColorPointer(3, GL_FLOAT, sizeof(vertex), &rect[0].r);
 		_shader.begin();
+		glUniform4f(_shader._color, 0, 1, 0, 1);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-		_shader.end();
 
 		//return;
 		vertex rect1[] =
@@ -64,8 +64,10 @@ public:
 		glVertexPointer(3, GL_FLOAT, sizeof(vertex), rect1);
 		glColorPointer(3, GL_FLOAT, sizeof(vertex), &rect1[0].r);
 		//glColor3f(0, 0, 1);
+		glUniform4f(_shader._color, 0, 0, 1, 1);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
+		_shader.end();
 	}
 };
 

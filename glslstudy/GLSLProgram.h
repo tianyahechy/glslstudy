@@ -113,17 +113,21 @@ protected:
 class HelloShader : public GLSLProgram
 {
 public:
+	uniform _color;
+public:
 	virtual void initialize()
 	{
 		const char * vs = "void main() \
 						   {\
 							  gl_Position = ftransform();\
 							  							}";
-		const char * ps = "void main() \
+		const char * ps = " uniform vec4 _color; \
+						void main() \
 						{\
 						gl_FragColor = vec4(1,0,0,1);\
 						}";
 		createProgram(vs,ps);
+		_color = glGetUniformLocation(_program, "_color");
 	}
 
 private:
