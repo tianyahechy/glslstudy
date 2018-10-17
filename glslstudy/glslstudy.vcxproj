@@ -86,6 +86,7 @@
     <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="OpenGLWindow.h" />
     <ClInclude Include="shaderVaring.h" />
+    <ClInclude Include="shaderVertex.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glew.c" />

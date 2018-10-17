@@ -3,12 +3,12 @@
 #include <math.h>
 #include "glew/glew.h"
 #include "OpenGLWindow.h"
-#include "shaderVaring.h"
+#include "shaderVertex.h"
 
 class sample1 : public OpenGLWindow
 {
 public:
-	shaderVaring _shader;
+	shaderVertex _shader;
 public:
 	struct vertex
 	{
@@ -68,6 +68,9 @@ public:
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		_shader.end();
+
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
 	}
 };
 
