@@ -81,10 +81,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FreeImage.h" />
     <ClInclude Include="GLContext.h" />
     <ClInclude Include="glew\glew.h" />
+    <ClInclude Include="GLFreeImage.hpp" />
     <ClInclude Include="GLSLProgram.h" />
     <ClInclude Include="OpenGLWindow.h" />
+    <ClInclude Include="shaderTexCoord.h" />
     <ClInclude Include="shaderVaring.h" />
     <ClInclude Include="shaderVertex.h" />
   </ItemGroup>
