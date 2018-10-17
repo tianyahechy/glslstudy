@@ -3,12 +3,12 @@
 #include <math.h>
 #include "glew/glew.h"
 #include "OpenGLWindow.h"
-#include "GLSLProgram.h"
+#include "shaderVaring.h"
 
 class sample1 : public OpenGLWindow
 {
 public:
-	ShaderUniform _shader;
+	shaderVaring _shader;
 public:
 	struct vertex
 	{

@@ -139,15 +139,15 @@ public:
 public:
 	virtual void initialize()
 	{
-		const char * vs = "void main() \
-						  						   {\
-												   							  gl_Position = ftransform();\
-																			  							  							}";
-		const char * ps = " uniform vec4 _color; \
-						  						void main() \
-																		{\
-																								gl_FragColor = _color;\
-																														}";
+		const char * vs =	"void main() \
+							{\
+								gl_Position = ftransform();\
+							}";
+		const char * ps =	"uniform vec4 _color; \
+							void main() \
+							{\
+								gl_FragColor = _color;\
+							}";
 		createProgram(vs, ps);
 		_color = glGetUniformLocation(_program, "_color");
 	}
