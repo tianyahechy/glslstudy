@@ -3,19 +3,19 @@
 #include <math.h>
 #include "glew/glew.h"
 #include "OpenGLWindow.h"
-#include "shaderTexCoord.h"
+#include "ShaderColors.h"
 #include "GLFreeImage.hpp"
 
 class sample1 : public OpenGLWindow
 {
 public:
-	shaderTexCoord _shader;
-	GLuint _texture;
+	shaderColors _shader;
 public:
 	struct vertex
 	{
 		float x, y, z;
-		float u,v;
+		unsigned char r0, g0, b0, a0;
+		unsigned char r1, g1, b1, a1;
 	};
 	char * _pixel;
 	sample1()
@@ -25,8 +25,6 @@ public:
 	virtual void onInitGL()
 	{
 		glewInit();
-		_texture = GLFreeImage::createTextureFromImage("E:/terrain.jpg");
-		glEnable(GL_TEXTURE_2D);
 		_shader.initialize();
 	}
 	virtual void render()
@@ -39,39 +37,20 @@ public:
 		//glColor3f(1, 0, 1);
 		vertex rect[] =
 		{
-			{ 10, 10, 0,  0, 1 },
-			{ 110, 10, 0, 1, 1 },
-			{ 10, 110, 0, 0, 0 },
-			{ 110, 110, 0, 1, 0},
+			{ 10, 10, 0, 255, 0, 0, 255, 255, 0, 0, 255 },
+			{ 510, 10, 0, 0, 255, 0, 255, 255, 0, 0, 255 },
+			{ 10, 510, 0, 0, 0, 255, 255, 255, 0, 0, 255 },
+			{ 510, 510, 0, 255, 0, 255, 255, 255, 0, 0, 255 },
 		};
 		//glColor3f(1, 0, 1);
 		//∞Û∂®Œ∆¿Ì
-		glBindTexture(GL_TEXTURE_2D, _texture);
-		glUniform1i(_shader._texture, 0);
 		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glVertexPointer(3, GL_FLOAT, sizeof(vertex), rect);
-		glTexCoordPointer(2, GL_FLOAT, sizeof(vertex), &rect[0].u);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glEnableClientState(GL_SECONDARY_COLOR_ARRAY);
 		_shader.begin();
-		glUniform4f(_shader._color, 0, 1, 0, 1);
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
-		//return;
-		vertex rect1[] =
-		{
-			{ 10, 10, 0, 0, 1 },
-			{ 110, 10, 0, 1, 1 },
-			{ 10, 110, 0, 0, 0 },
-			{ 110, 110, 0, 1, 0 },
-		};
-		for (int i = 0; i < 4; i++)
-		{
-			rect1[i].x += 100;
-		}
-		glVertexPointer(3, GL_FLOAT, sizeof(vertex), rect1);
-		glColorPointer(3, GL_FLOAT, sizeof(vertex), &rect1[0].u);
-		//glColor3f(0, 0, 1);
-		glUniform4f(_shader._color, 0, 0, 1, 1);
+		glVertexPointer(3, GL_FLOAT, sizeof(vertex), rect);
+		glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(vertex), &rect[0].r0);
+		glSecondaryColorPointer(4, GL_UNSIGNED_BYTE, sizeof(vertex), &rect[0].r1);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		_shader.end();
