@@ -3,19 +3,18 @@
 #include <math.h>
 #include "glew/glew.h"
 #include "OpenGLWindow.h"
-#include "ShaderColors.h"
+#include "shaderNormal.h"
 #include "GLFreeImage.hpp"
 
 class sample1 : public OpenGLWindow
 {
 public:
-	shaderColors _shader;
+	shaderNormal _shader;
 public:
 	struct vertex
 	{
 		float x, y, z;
-		unsigned char r0, g0, b0, a0;
-		unsigned char r1, g1, b1, a1;
+		float nx, ny, nz;
 	};
 	char * _pixel;
 	sample1()
@@ -37,26 +36,24 @@ public:
 		//glColor3f(1, 0, 1);
 		vertex rect[] =
 		{
-			{ 10, 10, 0, 255, 0, 0, 255, 255, 0, 0, 255 },
-			{ 510, 10, 0, 0, 255, 0, 255, 255, 0, 0, 255 },
-			{ 10, 510, 0, 0, 0, 255, 255, 255, 0, 0, 255 },
-			{ 510, 510, 0, 255, 0, 255, 255, 255, 0, 0, 255 },
+			{ 10, 10, 0,  1, 1,0 },
+			{ 510, 10, 0, 0, 1,1 },
+			{ 10, 510, 0, 0, 1,0 },
+			{ 510, 510, 0, 1,1,1 },
 		};
 		//glColor3f(1, 0, 1);
 		//∞Û∂®Œ∆¿Ì
 		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-		glEnableClientState(GL_SECONDARY_COLOR_ARRAY);
+		glEnableClientState(GL_NORMAL_ARRAY);
 		_shader.begin();
 		glVertexPointer(3, GL_FLOAT, sizeof(vertex), rect);
-		glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(vertex), &rect[0].r0);
-		glSecondaryColorPointer(4, GL_UNSIGNED_BYTE, sizeof(vertex), &rect[0].r1);
+		glNormalPointer(GL_FLOAT, sizeof(vertex), &rect[0].nx);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		_shader.end();
 
 		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_COLOR_ARRAY);
+		glDisableClientState(GL_NORMAL_ARRAY);
 	}
 };
 
