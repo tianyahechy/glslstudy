@@ -3,18 +3,18 @@
 #include <math.h>
 #include "glew/glew.h"
 #include "OpenGLWindow.h"
-#include "shaderNormal.h"
+#include "GLSLProgram.h"
 #include "GLFreeImage.hpp"
 
 class sample1 : public OpenGLWindow
 {
 public:
-	shaderNormal _shader;
+	ShaderUniform _shader;
 public:
 	struct vertex
 	{
 		float x, y, z;
-		float nx, ny, nz;
+		unsigned char r, g, b;
 	};
 	char * _pixel;
 	sample1()
@@ -36,24 +36,24 @@ public:
 		//glColor3f(1, 0, 1);
 		vertex rect[] =
 		{
-			{ 10, 10, 0,  1, 1,0 },
-			{ 510, 10, 0, 0, 1,1 },
-			{ 10, 510, 0, 0, 1,0 },
-			{ 510, 510, 0, 1,1,1 },
+			{ 10, 10, 0,  1, 0,0 },
+			{ 510, 10, 0, 0, 1,0 },
+			{ 10, 510, 0, 0, 0,1 },
+			{ 510, 510, 0, 1,0,1 },
 		};
-		//glColor3f(1, 0, 1);
-		//∞Û∂®Œ∆¿Ì
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_NORMAL_ARRAY);
 		_shader.begin();
+		glColor3f(1, 0, 1);
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_COLOR_ARRAY);
 		glVertexPointer(3, GL_FLOAT, sizeof(vertex), rect);
-		glNormalPointer(GL_FLOAT, sizeof(vertex), &rect[0].nx);
+		glColorPointer(3, GL_FLOAT, sizeof(vertex), &rect[0].r);
+
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 
 		_shader.end();
 
 		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_NORMAL_ARRAY);
+		glDisableClientState(GL_COLOR_ARRAY);
 	}
 };
 

@@ -8,18 +8,18 @@ public:
 	virtual void initialize()
 	{
 
-		const char * vs = "uniform vec4 _color;\
+		const char * vs = "	uniform vec4 _color;\
 							varying vec4 outColor;\
-					void main() \
+							void main() \
 							{\
-									outColor = _color;\
-									gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
-								}";
-		const char * ps = "varying vec4 outColor; \
-	void main() \
-			{\
-			gl_FragColor = outColor;\
-		}";
+								outColor = _color;\
+								gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
+							}";
+		const char * ps = "	varying vec4 outColor; \
+							void main() \
+							{\
+								gl_FragColor = outColor;\
+							}";
 
 		createProgram(vs, ps);
 		_color = glGetUniformLocation(_program, "_color");

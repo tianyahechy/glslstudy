@@ -120,11 +120,11 @@ public:
 		const char * vs = "void main() \
 						   {\
 							  gl_Position = ftransform();\
-							  							}";
+							}";
 		const char * ps = 
 						"void main() \
 						{\
-						gl_FragColor = vec4(1,0,0,1);\
+							gl_FragColor = vec4(1,0,0,1);\
 						}";
 		createProgram(vs,ps);
 		_color = glGetUniformLocation(_program, "_color");
@@ -143,10 +143,10 @@ public:
 							{\
 								gl_Position = ftransform();\
 							}";
-		const char * ps =	"uniform vec4 _color; \
+		const char * ps =	"uniform vec4 _color = vec4(1,0,0,1) ; \
 							void main() \
 							{\
-								gl_FragColor = _color;\
+								gl_FragColor = _color * 0.5;\
 							}";
 		createProgram(vs, ps);
 		_color = glGetUniformLocation(_program, "_color");
