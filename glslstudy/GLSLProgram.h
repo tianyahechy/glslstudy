@@ -143,10 +143,14 @@ public:
 							{\
 								gl_Position = ftransform();\
 							}";
-		const char * ps =	"uniform vec4 _color = vec4(1,0,0,1) ; \
+		const char * ps = "	uniform vec4 _color = vec4(1,0,0,1) ; \
+							void fun(out vec4 color)\
+							{\
+								color = color * 1;\
+							}\
 							void main() \
 							{\
-								gl_FragColor = _color * 0.5;\
+								gl_FragColor = fun(_color);\
 							}";
 		createProgram(vs, ps);
 		_color = glGetUniformLocation(_program, "_color");

@@ -14,7 +14,7 @@ public:
 	struct vertex
 	{
 		float x, y, z;
-		unsigned char r, g, b;
+		float r, g, b;
 	};
 	char * _pixel;
 	sample1()
