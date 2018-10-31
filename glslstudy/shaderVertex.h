@@ -4,19 +4,20 @@
 class shaderVertex : public GLSLProgram
 {
 public:
+	typedef int attribute;
+public:
 	uniform _color;
+	attribute _position;
 	virtual void initialize()
 	{
 
-		const char * vs = "	uniform vec4 _color;\
-							varying vec4 outColor;\
-							void main() \
-							{\
-								outColor = _color;\
+		const char * vs = " attribute vec3 _position;\n\
+							void main() \n\
+							{\n\
 								gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;\
 							}";
-		const char * ps = "	varying vec4 outColor; \
-							void main() \
+		const char * ps = "	uniform vec4 _color;\n\
+							void main() \n\
 							{\
 								gl_FragColor = outColor;\
 							}";

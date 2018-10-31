@@ -42,18 +42,17 @@ public:
 			{ 510, 510, 0, 1,0,1 },
 		};
 		_shader.begin();
-		glColor3f(1, 0, 1);
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_COLOR_ARRAY);
-		glVertexPointer(3, GL_FLOAT, sizeof(vertex), rect);
-		glColorPointer(3, GL_FLOAT, sizeof(vertex), &rect[0].r);
-
+		glUniform4f(_shader._color, 0, 1, 0, 1);
+		glEnableVertexAttribArray(_shader._position);
+		glVertexAttribPointer(_shader._position, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), rect);
+		glEnableVertexAttribArray(_shader._color);
+		glVertexAttribPointer(_shader._color, 3, GL_FLOAT, GL_FALSE, sizeof(vertex), &rect[0].r);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-
+		glDisableVertexAttribArray(_shader._position);
+		glDisableVertexAttribArray(_shader._color);
+		
 		_shader.end();
 
-		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisableClientState(GL_COLOR_ARRAY);
 	}
 };
 

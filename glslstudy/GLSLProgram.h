@@ -135,25 +135,30 @@ public:
 class ShaderUniform : public GLSLProgram
 {
 public:
-	uniform _color;
+	uniform _ucolor;
+	attribute _position;
+	attribute _color;
 public:
 	virtual void initialize()
 	{
-		const char * vs =	"void main() \
-							{\
-								gl_Position = ftransform();\
+		const char * vs = "	attribute vec3 _position; \n\
+						  	attribute vec3 _color;\n\
+							varying vec3 _outColor;\n\
+							void main() \n\
+							{\n\
+								_outColor = _color;\n\
+								gl_Position = gl_ModelViewProjectionMatrix * vec4(_position,1.0);\n\
 							}";
-		const char * ps = "	uniform vec4 _color = vec4(1,0,0,1) ; \
-							void fun( inout vec4 color)\
-							{\
-								color = color * 0.01;\
-							}\
-							void main() \
-							{\
-								gl_FragColor = _color * 0.1;\
+		const char * ps = "	uniform vec4 _color; \n\
+							varying vec3 _outColor;\n\
+							void main() \n\
+							{\n\
+								gl_FragColor = vec4(_outColor,1);\n\
 							}";
 		createProgram(vs, ps);
-		_color = glGetUniformLocation(_program, "_color");
+		_ucolor = glGetUniformLocation(_program, "_color");
+		_position = glGetAttribLocation(_program, "_position");
+		_color = glGetAttribLocation(_program, "_color");
 	}
 
 	// π”√shader
