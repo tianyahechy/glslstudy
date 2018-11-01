@@ -174,3 +174,45 @@ public:
 private:
 
 };
+
+class ShareVertex : public GLSLProgram
+{
+public:
+	typedef int attribute;
+	attribute _position;
+	attribute _color;
+public:
+	virtual void initialize()
+	{
+		const char * vs = "	#version 130\n\
+							in vec3 _position; \n\
+						  	in vec3 _color;\n\
+							out vec3 _outColor;\n\
+							void main() \n\
+							{\n\
+								_outColor = _color;\n\
+								gl_Position = gl_ModelViewProjectionMatrix * vec4(_position,1.0);\n\
+							}";
+		const char * ps = "	in vec3 _outColor;\n\
+							void main() \n\
+							{\n\
+								gl_FragColor = vec4(_outColor,1);\n\
+							}";
+		createProgram(vs, ps);
+		_position = glGetAttribLocation(_program, "_position");
+		_color = glGetAttribLocation(_program, "_color");
+	}
+
+	// π”√shader
+	virtual void begin()
+	{
+		glUseProgram(_program);
+	}
+	//Ω· ¯
+	virtual void end()
+	{
+		glUseProgram(0);
+	}
+private:
+
+};

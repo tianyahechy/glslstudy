@@ -9,7 +9,7 @@
 class sample1 : public OpenGLWindow
 {
 public:
-	ShaderUniform _shader;
+	ShareVertex _shader;
 public:
 	struct vertex
 	{
