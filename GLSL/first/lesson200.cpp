@@ -75,7 +75,8 @@ public:
         _shader.begin();
         glUniformMatrix4fv(_shader._mvp,1,GL_FALSE,mvp.data());
         glUniform3f(_shader._lightDir,_camera._dir.x,_camera._dir.y,_camera._dir.z);
-
+		glUniform3f(_shader._lightColor, 0.0f, 0.0f, 1.0f);
+		glUniform3f(_shader._lightAmbient, 0.0f, 0.0f, 0.0f);
         glVertexAttribPointer(_shader._position, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), grounds);
         glVertexAttribPointer(_shader._normal, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), &grounds[0].nx);
         glDrawArrays(GL_TRIANGLES,0,6);
@@ -83,7 +84,7 @@ public:
 
         static  float   angle   =   0;
 
-        angle   +=  0.1f;
+        angle   +=  0.6f;
         CELL::matrix4   matModel;
         CELL::matrix4   matTrans;
         matTrans.translate(0,20,0);
@@ -91,6 +92,8 @@ public:
         mvp *= (matTrans *matModel);
         glUniformMatrix4fv(_shader._mvp, 1, GL_FALSE, mvp.data());
         glVertexAttribPointer(_shader._position, 3, GL_FLOAT, GL_FALSE, sizeof(ModelBox::V3N3), _modelBox._data);
+		glUniform3f(_shader._lightColor, 0.0f, 0.9f, 0.0f);
+		glUniform3f(_shader._lightAmbient, 0.1f, 0.1f, 0.1f);
         glVertexAttribPointer(_shader._normal, 3, GL_FLOAT, GL_FALSE, sizeof(ModelBox::V3N3), &_modelBox._data[0].nx);
         glDrawArrays(GL_TRIANGLES, 0, 36);
 
