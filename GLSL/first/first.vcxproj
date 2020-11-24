@@ -24,6 +24,7 @@
     <ClInclude Include="GLContext.h" />
     <ClInclude Include="GLSLProgram.hpp" />
     <ClInclude Include="lifeiTimeStamp.hpp" />
+    <ClInclude Include="ModelBox.hpp" />
     <ClInclude Include="OpenGLWindow.h" />
     <ClInclude Include="ShaderAttribute.h" />
     <ClInclude Include="ShaderColors.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="shaderLayout_out.h" />
     <ClInclude Include="ShaderLayout_UniformStruct.h" />
     <ClInclude Include="ShaderLight.h" />
+    <ClInclude Include="ShaderLightWithTexture.h" />
     <ClInclude Include="ShaderNormal.h" />
     <ClInclude Include="shaderTexCoord.h" />
     <ClInclude Include="ShaderVaring.h" />

@@ -8,6 +8,7 @@ public:
     {
         float x,y,z;
         float nx,ny,nz;
+		float u, v;
     };
 public:
     V3N3    _data[36];

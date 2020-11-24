@@ -6,7 +6,7 @@
 #include "stb_image.h"
 #include "OpenGLWindow.h"
 #include "CELLMath.hpp"
-#include "ShaderLight.h"
+#include "ShaderLightWithTexture.h"
 #include "Camera.hpp"
 #include "ModelBox.hpp"
 
@@ -14,13 +14,15 @@
 class   SamplerExt :public OpenGLWindow
 {
 public:
-    ShaderLight     _shader;
+    ShaderLightWithTexture     _shader;
     Camera          _camera;
     bool            _lButtonDown;
     bool            _rButtonDown;
     CELL::int2      _mouseDown;
     CELL::float3    _mouseRot;
     ModelBox        _modelBox;
+	GLuint			_texGround;
+	GLuint			_texBox;
 public:
 
     struct  Vertex
@@ -50,7 +52,9 @@ public:
         getResourcePath(0,binPath);
         char    resPath[1024];
         sprintf(resPath,"%s../data/1.jpg",binPath);
-        //_texture =   createTextureFromImage(resPath);
+        _texGround =   createTextureFromImage(resPath);
+		sprintf(resPath, "%s../data/Terrain.bmp", binPath);
+		_texBox = createTextureFromImage(resPath);
     }
     void    renderGroud()
     {
@@ -72,7 +76,10 @@ public:
         _camera.setViewSize(_width,_height);
         _camera.perspective(45,(float)_width/(float)_height,1,100000);
         CELL::matrix4   mvp =   _camera.getProject() * _camera.getView();
+		glBindTexture(GL_TEXTURE_2D, _texGround);
+
         _shader.begin();
+		glUniform1i(_shader._texture, 0);
         glUniformMatrix4fv(_shader._mvp,1,GL_FALSE,mvp.data());
         glUniform3f(_shader._lightDir,_camera._dir.x,_camera._dir.y,_camera._dir.z);
 		glUniform3f(_shader._lightColor, 0.0f, 0.0f, 1.0f);

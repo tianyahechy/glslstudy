@@ -108,6 +108,12 @@
     <ClInclude Include="Camera.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="ShaderLightWithTexture.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelBox.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="glew.c">
